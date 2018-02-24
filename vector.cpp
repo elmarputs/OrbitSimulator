@@ -3,7 +3,9 @@
 
 Vector::Vector()
 {
-
+    x = 0;
+    y = 0;
+    z = 0;
 }
 
 Vector::Vector(double a, double b, double c)
@@ -24,6 +26,11 @@ Vector Vector::operator+=(Vector v)
     this->x += v.x;
     this->y += v.y;
     this->z += v.z;
+}
+
+Vector Vector::operator+(Vector v)
+{
+    return Vector(v.x + this->x, v.y + this->y, v.z + this->z);
 }
 
 Vector Vector::operator-(Vector v)
