@@ -8,7 +8,7 @@ class Vector
     Vector();
     Vector(double, double, double);
     double getLength();
-    Vector operator+=(Vector);
+    void operator+=(Vector);
     Vector operator+(Vector);
     Vector operator-(Vector);
     Vector operator*(double);
