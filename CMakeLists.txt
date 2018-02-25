@@ -1,4 +1,8 @@
 cmake_minimum_required(VERSION 2.8)
 
 project(CppTest)
-add_executable(${PROJECT_NAME} "main.cpp" "vector.cpp" "integrators.cpp")
+
+include_directories(include)
+file(GLOB SOURCES "src/*.cpp")
+
+add_executable(${PROJECT_NAME} ${SOURCES})
