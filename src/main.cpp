@@ -10,7 +10,7 @@
 const double G = 6.67408e-11; // m3 kg-1 s-2
 const int n = 2; // Number of bodies to propagate
 const double propagationTime = 6000.0; // s
-const double stepSize = 30.0; // s
+const double stepSize = 1.0; // s
 
 class Body
 {
@@ -85,9 +85,17 @@ int main()
                 // Calculate begin point
                 Vector k1 = r * (-mu_j/std::pow(r.getLength(), 3));
 
+
                 // Extrapolate position of body i and update relative vector
-                Vector tempVel1 = bodies[i].velocity + k1 * (stepSize/1.0);
-                Vector tempPos = bodies[i].position + tempVel1 * (stepSize/1.0);
+                Vector tempVel1 = bodies[i].velocity + k1 * (stepSize/2.0);
+
+                if(counter == 10 && i == 1)
+                {
+                    std::cout << bodies[i].velocity.x << ", " << bodies[i].velocity.y << ", " << bodies[i].velocity.z << "\n";
+                    std::cout << k1.x << ", " << k1.y << ", " << k1.z << "\n";
+                }
+
+                Vector tempPos = bodies[i].position + tempVel1 * (stepSize/2.0);
                 r = bodies[j].position - tempPos;
                 // Calculate midpoint 1
                 Vector k2 = r * (-mu_j/std::pow(r.getLength(), 3));
@@ -106,8 +114,17 @@ int main()
                 // Calculate endpoint
                 Vector k4 = r * (-mu_j/std::pow(r.getLength(), 3));
 
-                bodies[i].accelerations += k1;//(k1 + k2*2 + k3*2 + k4) * (1.0/6.0);
+                Vector acc = (k1 + k2*2 + k3*2 + k4) * (1.0/6.0);
+
+                bodies[i].accelerations += acc;
                 drdx += (bodies[i].velocity + tempVel1*2 + tempVel2*2 + tempVel3) * (1.0/6.0);
+
+                if(counter == 10 && i == 1)
+                {
+                    std::cout << k1.getLength() << "\n";
+                    std::cout << k2.getLength() << "\n";
+                    std::cout << acc.getLength() << "\n";
+                }
             }
 
             // Update velocity and position vectors
