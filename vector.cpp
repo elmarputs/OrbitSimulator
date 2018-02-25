@@ -21,7 +21,7 @@ double Vector::getLength()
     return std::sqrt(x*x + y*y + z*z);
 }
 
-Vector Vector::operator+=(Vector v)
+void Vector::operator+=(Vector v)
 {
     this->x += v.x;
     this->y += v.y;
