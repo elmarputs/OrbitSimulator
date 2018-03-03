@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include "vector.h"
-#include "integrators.h"
+#include "forwardEuler.h"
 #include <string>
 #include <cmath>
 #include <fstream>
@@ -22,7 +22,7 @@ class Body
     Vector position;
     Vector velocity;
     Vector accelerations;
-    Vector positions[];
+    //Vector positions[];
     double mass;
 
 };
@@ -49,10 +49,9 @@ Body::Body(Vector initPos, Vector initVel, double initMass)
     mass = initMass;
 }
 
-void outputToFile(Vector data[])
+void testFunction()
 {
-
-
+    simulator::ForwardEulerIntegrator eulerIntegrator();
 }
 
 int main()
@@ -72,7 +71,7 @@ int main()
             Vector drdx = Vector(0.0, 0.0, 0.0);
             for(int j = 0; j < n; j++)
             {
-                // Implementation of RK4 integrator with Cartesian EoMs
+                // Implementation of RK4 integrator with Cartesian EoM
                 // Don't calculate forces if exerting body j == influenced body i
                 if(j == i)
                 {
