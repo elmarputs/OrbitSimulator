@@ -75,3 +75,4 @@ Thumbs.db
 /cmake-build-debug/
 /.idea/
 /.vs/
+*.json
